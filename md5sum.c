@@ -119,7 +119,8 @@ typedef struct MD5state
 	uint len;
 	uint state[4];
 }MD5state;
-MD5state *nil;
+
+MD5state *nil = 0;
 
 void encode(byte*, uint*, uint);
 void decode(uint*, byte*, uint);
@@ -310,13 +311,3 @@ decode(uint *output, byte *input, uint len)
 		*output++ = input[0] | (input[1] << 8) |
 			(input[2] << 16) | (input[3] << 24);
 }
-
-
-
-/*
-typedef unsigned long ulong;
-typedef unsigned char uchar;
-
-static uchar t64d[256];
-static char t64e[64];
-*/
