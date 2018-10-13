@@ -313,84 +313,10 @@ decode(uint *output, byte *input, uint len)
 
 
 
-
+/*
 typedef unsigned long ulong;
 typedef unsigned char uchar;
 
 static uchar t64d[256];
 static char t64e[64];
-
-static void
-init64(void)
-{
-	int c, i;
-
-	memset(t64d, 255, 256);
-	memset(t64e, '=', 64);
-	i = 0;
-	for(c = 'A'; c <= 'Z'; c++){
-		t64e[i] = c;
-		t64d[c] = i++;
-	}
-	for(c = 'a'; c <= 'z'; c++){
-		t64e[i] = c;
-		t64d[c] = i++;
-	}
-	for(c = '0'; c <= '9'; c++){
-		t64e[i] = c;
-		t64d[c] = i++;
-	}
-	t64e[i] = '+';
-	t64d['+'] = i++;
-	t64e[i] = '/';
-	t64d['/'] = i;
-}
-
-int
-dec64(uchar *out, char *in, int n)
-{
-	ulong b24;
-	uchar *start = out;
-	int i, c;
-
-	if(t64e[0] == 0)
-		init64();
-
-	b24 = 0;
-	i = 0;
-	while(n-- > 0){
-		c = t64d[*in++];
-		if(c == 255)
-			continue;
-		switch(i){
-		case 0:
-			b24 = c<<18;
-			break;
-		case 1:
-			b24 |= c<<12;
-			break;
-		case 2:
-			b24 |= c<<6;
-			break;
-		case 3:
-			b24 |= c;
-			*out++ = b24>>16;
-			*out++ = b24>>8;
-			*out++ = b24;
-			i = -1;
-			break;
-		}
-		i++;
-	}
-	switch(i){
-	case 2:
-		*out++ = b24>>16;
-		break;
-	case 3:
-		*out++ = b24>>16;
-		*out++ = b24>>8;
-		break;
-	}
-	*out = 0;
-	return out - start;
-}
+*/
