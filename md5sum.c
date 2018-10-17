@@ -11,25 +11,25 @@ typedef unsigned char byte;
  */
 enum
 {
-	S11=	7,
-	S12=	12,
-	S13=	17,
-	S14=	22,
+	S11 =	7,
+	S12 =	12,
+	S13 =	17,
+	S14 =	22,
 
-	S21=	5,
-	S22=	9,
-	S23=	14,
-	S24=	20,
+	S21 =	5,
+	S22 =	9,
+	S23 =	14,
+	S24 =	20,
 
-	S31=	4,
-	S32=	11,
-	S33=	16,
-	S34=	23,
+	S31 =	4,
+	S32 =	11,
+	S33 =	16,
+	S34 =	23,
 
-	S41=	6,
-	S42=	10,
-	S43=	15,
-	S44=	21
+	S41 =	6,
+	S42 =	10,
+	S43 =	15,
+	S44 =	21
 };
 
 typedef struct Table
@@ -127,8 +127,7 @@ void decode(uint*, byte*, uint);
 MD5state* md5(byte*, uint, byte*, MD5state*);
 void sum(FILE*, char*);
 
-void
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int c;
 	FILE *fd;
@@ -136,7 +135,7 @@ main(int argc, char **argv)
 	argv++; argc--;
 
 	if(argc == 0)
-		sum(stdin,0);
+		sum(stdin, 0);
 	else for(c = 0; c < argc; c++){
 		fd = fopen(argv[c],"r");
 		if(fd==NULL){
@@ -148,12 +147,11 @@ main(int argc, char **argv)
 	}
 }
 
-void
-sum(FILE *fd, char *name)
+void sum(FILE *fd, char *name)
 {
 	byte *buf;
 	byte digest[16];
-	char pr64[25];
+
 	int i, n;
 	MD5state *s;
 
@@ -172,10 +170,10 @@ sum(FILE *fd, char *name)
 	}
 	md5(buf, n, digest, s);
 	
-	for(i=0;i<16;i++) printf("%.2X", digest[i]);
+	for(i=0;i<16;i++) printf("%.2x", digest[i]);
 	
 	if(name)
-		printf("\t%s", name);
+		printf("  %s", name);
 	printf("\n");
 	free(buf);
 }
